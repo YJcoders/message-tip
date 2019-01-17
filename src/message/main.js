@@ -5,32 +5,39 @@ const MessageConstructor = Vue.extend(Main)
 // 所有消息弹窗
 const messagePool = []
 const getAnInstance = () => {
-  // 如果有就取出第一个，没有就插件一个弹窗实例
+  // 如果有就取出第一个，没有就创建一个弹窗实例
   if (messagePool.length > 0) {
     const instance = messagePool[0]
     messagePool.splice(0, 1)
     return instance
   }
-  return new MessageConstructor()
+  return new MessageConstructor({
+    el: document.createElement('div')
+  })
 }
 
 MessageConstructor.prototype.close = function () {
   this.show = false
+  this.$el.addEventListener('transitionend', removeDom)
+}
+
+const removeDom = event => {
+  if (event.target.parentNode) {
+    event.target.parentNode.removeChild(event.target)
+  }
 }
 
 const Message = function (options) {
-  // let duration = options.duration || 3000
-
+  console.log(options, 456)
   let instance = getAnInstance()
   instance.closed = false
-  // clearTimeout(instance.timer)
   instance.message = typeof options === 'string' ? options : options.message
-  // instance.position = options.position || 'middle'
   instance.type = options.type || ''
   instance.duration = options.duration || 3000
-  // instance.iconClass = options.iconClass || ''
-  document.body.appendChild(instance.$el)
 
+  document.body.appendChild(instance.$el)
+  instance.show = true
+  instance.$el.removeEventListener('transitionend', removeDom)
   return instance
 };
   // 支持this.$message.success('xxx')方式，同于this.$message({type: 'success',message: 'xxx'})
@@ -45,5 +52,6 @@ const Message = function (options) {
     return Message(options)
   }
 })
+// Vue.prototype.$Message = MessageConstructor
 
 export default Message

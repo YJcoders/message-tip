@@ -31,7 +31,7 @@ export default {
   },
   data () {
     return {
-      show: true
+      show: false
     }
   },
   computed: {
@@ -40,16 +40,7 @@ export default {
     }
   },
   created () {
-    let app = []
-    let add = () => {
-      if (app.length > 0) {
-        let ins = app[0]
-        return ins
-      }
-      return 888
-    }
-    let aee = add()
-    console.log(aee, 7747)
+
   },
   mounted () {
     this.startTimer()
@@ -63,20 +54,16 @@ export default {
       this.show = false
     },
     clearTimer () {
-      console.log(888)
       clearTimeout(this.timer)
     },
     startTimer () {
-      console.log(777)
-      if (this.duration) {
-        this.timer = setTimeout(() => {
-          console.log(222222)
-          this.show = false
-          // if (!this.show) {
-
-          // }
-        }, this.duration)
-      }
+      this.$nextTick(() => {
+        if (this.duration) {
+          this.timer = setTimeout(() => {
+            this.show = false
+          }, this.duration)
+        }
+      })
     },
     keyDown (e) {
       if (e.keyCode === 27) {
@@ -91,7 +78,11 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
   .msg {
-    position: relative;
+    position: fixed;
+    top: 100px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000000;
     display: inline-block;
     max-width: 300px;
     padding: 10px 55px 10px 20px;
@@ -112,11 +103,28 @@ export default {
     color: #c3c6ce;
   }
   .fade-enter-active, .fade-leave-active {
-    transition: opacity .2s;
+    transition: all .3s ease-in-out;
   }
-  .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+  .fade-enter {
+    transform: translateY(-300px);
     opacity: 0;
   }
+  .fade-enter-to {
+    transform: translateY(-100px);
+    opacity: 1;
+  }
+  /* .fade-leave {
+    transform: translateY(-100px);
+    opacity: 0;
+  } */
+  /* .fade-leave-to {
+    transform: translateY(0px);
+    opacity: 0;
+  } */
+  /* .fade-leave-active {
+    transform: translateY(-20px);
+  } */
+
   .message-warn {
     color: #e6a23c;
     background-color: #fdf6ec;
