@@ -5,17 +5,22 @@
 ## Build Setup
 
 ``` bash
+# description
+一个消息弹窗插件
+
 # install dependencies
-npm install
+npm install message-tip
 
-# serve with hot reload at localhost:8080
-npm run dev
+# import to your project
+import Message from 'message-tip'
 
-# build for production with minification
-npm run build
+Vue.use(Message)
 
-# build for production and view the bundle analyzer report
-npm run build --report
-```
-
-For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+# how to use
+this.$Message('This is message tip !')
+this.$Message({message: 'This is message tip !', type: 'success', duration: 3000})
+# type: 'info' or 'warn' or 'success' or 'error'
+# duration: {
+#   type: Number,
+#   default: 2000
+# }

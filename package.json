@@ -1,8 +1,9 @@
 {
   "name": "message-tip",
-  "version": "1.0.1",
-  "description": "A plugin of message",
+  "version": "1.0.3",
+  "description": "A plugin of message base vue",
   "author": "YJcoders",
+  "keywords": ["vue", "message", "message-tip", "消息提示"],
   "license": "MIT",
   "private": false,
   "main": "dist/vue-message.js",
