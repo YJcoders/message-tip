@@ -28,12 +28,11 @@ const removeDom = event => {
 }
 
 const Message = function (options) {
-  console.log(options, 456)
   let instance = getAnInstance()
   instance.closed = false
   instance.message = typeof options === 'string' ? options : options.message
   instance.type = options.type || ''
-  instance.duration = options.duration || 3000
+  instance.duration = options.duration || 2000
 
   document.body.appendChild(instance.$el)
   instance.show = true
@@ -52,6 +51,6 @@ const Message = function (options) {
     return Message(options)
   }
 })
-// Vue.prototype.$Message = MessageConstructor
+// Vue.prototype.$Message = Message
 
 export default Message

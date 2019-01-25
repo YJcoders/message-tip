@@ -102,28 +102,22 @@ export default {
     font-size: 25px;
     color: #c3c6ce;
   }
-  .fade-enter-active, .fade-leave-active {
-    transition: all .3s ease-in-out;
+  .fade-enter-active {
+    animation: fadeIn .3s ease-in;
   }
-  .fade-enter {
-    transform: translateY(-300px);
-    opacity: 0;
+  .fade-leave-active {
+    animation: fadeIn .3s ease-out reverse;
   }
-  .fade-enter-to {
-    transform: translateY(-100px);
-    opacity: 1;
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(-400px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(-100px)
+    }
   }
-  /* .fade-leave {
-    transform: translateY(-100px);
-    opacity: 0;
-  } */
-  /* .fade-leave-to {
-    transform: translateY(0px);
-    opacity: 0;
-  } */
-  /* .fade-leave-active {
-    transform: translateY(-20px);
-  } */
 
   .message-warn {
     color: #e6a23c;
